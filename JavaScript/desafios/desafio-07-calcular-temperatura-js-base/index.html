@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Conversão Temperatura</title>
+</head>
+
+<body>
+
+    <h1>Conversor de temperatura</h1>
+
+    <form id="formtemperatura">
+        <input type="number" required name="temperatura" id="temperatura">
+        <input type="checkbox" id="celcius" name="temperatura">Celcius</checkbox>
+        <input type="checkbox" id="fahrenheit" name="temperatura">Fahrenheit</checkbox>
+        <button type="submit" id="btnConverter">Converter</button>
+    </form>
+
+    <script>
+        let temp = document.getElementById("temperatura")
+        let cel = document.getElementById("celcius")
+        let fah = document.getElementById("fahrenheit")
+        let btn = document.getElementById("btnConverter")
+
+        btn.addEventListener("click", function (tela) {
+
+            tela.preventDefault()
+            if (cel.checked == true) {
+                var resp = `Temperatura em C°: ${(parseInt(temp.value) - 32) / 1.8}°`
+            }
+            if (fah.checked == true) {
+                var resp = `Temperatura em F°: ${parseInt(temp.value) * 1.8 + 32}°`
+            }
+            if (fah.checked == false && cel.checked == false) {
+                var resp = "Selecione uma das temperaturas para conversão"
+            }
+            if (fah.checked == true && cel.checked == true) {
+                var resp = "Selecione somente uma das temperaturas para conversão"
+            }
+
+            console.log(resp);
+
+            var verificacao = document.getElementById("respSpan")
+
+            if (!verificacao) {
+                var respostaTela = document.createElement("span")
+                respostaTela.id = "respSpan"
+
+                var cont = document.createTextNode(resp)
+                respostaTela.appendChild(cont)
+
+                var divAt = document.getElementById("formtemperatura")
+                document.body.insertBefore(respostaTela, divAt)
+            }
+            if (verificacao) {
+                verificacao.innerHTML = resp
+            }
+
+        })
+    </script>
+
+</body>
+
+</html>
